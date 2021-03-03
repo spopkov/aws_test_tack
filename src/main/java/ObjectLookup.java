@@ -1,11 +1,7 @@
-import awsobject.AwsInstance;
 import awsobject.base.AwsObject;
-import enums.Region;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -18,36 +14,32 @@ public class ObjectLookup {
         List<AwsObject> awsObjList = StringToObject.getAllObjects();
         Map<String, String> propertyMap = new HashMap<String, String>() {{
             put("state", "running");
-            put("region", "oregon");
+            put("region", "london");
         }};
         System.out.println(awsLookup(awsObjList, propertyMap));
     }
 
     public static List<AwsObject> awsLookup(List<AwsObject> awsObjList, Map<String, String> propertyMap) {
-        Predicate<AwsObject> p = e -> getFromMap(propsToMap(e),"region").equals(propertyMap.get("region"));
-        p = p.and(e -> getFromMap(propsToMap(e),"state").equals(propertyMap.get("state")));
-
-        List<AwsObject> filteredObjects = awsObjList.stream()
-                .filter(p).collect(Collectors.toList());
-        return filteredObjects;
+        List<Predicate<AwsObject>> awsObjectPredicates = getPredicate(propertyMap);
+        return awsObjList.stream()
+                .filter(awsObjectPredicates
+                        .stream()
+                        .reduce(x -> true, Predicate::and))
+                .collect(Collectors.toList());
     }
 
-    private static boolean compareProperties(AwsObject awsObject, Map<String, String> propertyMap) {
-        Map<String, String> objectMap = propsToMap(awsObject);
-     return  objectMap.containsValue(propertyMap.get("region"));
-//        Map<String, Boolean> m = areEqualKeyValues(objectMap, propertyMap);
-//        return true;
-    }
+    private static List<Predicate<AwsObject>> getPredicate(Map<String, String> propertyMap) {
+        List<Predicate<AwsObject>> allPredicates = new ArrayList<>();
+        String[] keys = propertyMap.keySet().toArray(new String[0]);
 
-    private static Map<String, Boolean> areEqualKeyValues(Map<String, String> first, Map<String, String> second) {
-        return first.entrySet().stream()
-                .collect(Collectors.toMap(e -> e.getKey(),
-                        e -> e.getValue().equals(second.get(e.getKey()))));
+        for (String key : keys) {
+            allPredicates.add(awsObject -> getFromMap(propsToMap(awsObject), key).equals(propertyMap.get(key)));
+        }
+        return allPredicates;
     }
 
     private static Map<String, String> propsToMap(AwsObject awsObject) {
         String props = awsObject.toString().replace(" ", "");
-        Map<String, String> propsMap = objStringToMap(props);
-        return propsMap;
+        return objStringToMap(props);
     }
 }

@@ -12,9 +12,9 @@ import static util.ResourceFileHelper.getAwsObjectsString;
 public class StringToObject {
 
     public static List<AwsObject> getAllObjects() {
-        List<AwsEntityType> al = new ArrayList<>(Arrays.asList(AwsEntityType.values()));
+        List<AwsEntityType> awsEntityTypes = new ArrayList<>(Arrays.asList(AwsEntityType.values()));
         List<List<AwsObject>> allObjects = new ArrayList<>();
-        al.forEach(awsEntityType -> {
+        awsEntityTypes.forEach(awsEntityType -> {
             allObjects.add(getObjectList(awsEntityType, getAwsObjectsString(awsEntityType)));
         });
         return allObjects.stream()
