@@ -11,14 +11,6 @@ public class AwsSnapshot extends AwsObject {
         this.SourceVolumeID = sourceVolumeID;
     }
 
-    public int getSourceVolumeID() {
-        return SourceVolumeID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     private int SourceVolumeID;
     private String name;
 }

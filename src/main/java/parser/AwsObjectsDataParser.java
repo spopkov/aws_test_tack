@@ -1,4 +1,5 @@
-import awsobject.AwsInstance;
+package parser;
+
 import awsobject.base.AwsObject;
 import enums.AwsEntityType;
 import factory.AwsObjectFactory;
@@ -9,9 +10,9 @@ import java.util.stream.Collectors;
 
 import static util.ResourceFileHelper.getAwsObjectsString;
 
-public class StringToObject {
+public class AwsObjectsDataParser {
 
-    public static List<AwsObject> getAllObjects() {
+    public List<AwsObject> getAllAwsObjects() {
         List<AwsEntityType> awsEntityTypes = new ArrayList<>(Arrays.asList(AwsEntityType.values()));
         List<List<AwsObject>> allObjects = new ArrayList<>();
         awsEntityTypes.forEach(awsEntityType -> {
@@ -22,9 +23,9 @@ public class StringToObject {
                 .collect(Collectors.toList());
     }
 
-    public static List<AwsObject> getObjectList(AwsEntityType type, String objectsString) {
+    public List<AwsObject> getObjectList(AwsEntityType type, String objectsString) {
 
-        List<Map<String, String>> properties = new LinkedList<>();
+        List<Map<String, String>> properties = new ArrayList<>();
         List<String> objects = getAwsObjectsList(objectsString);
 
         objects.forEach(dataString -> properties.add(StringUtil.stringToMap(dataString, ",")));
@@ -38,7 +39,7 @@ public class StringToObject {
         return objectList;
     }
 
-    private static List<String> getAwsObjectsList(String objectsString){
+    private List<String> getAwsObjectsList(String objectsString){
         return Arrays.asList(objectsString.split("%"));
     }
 }

@@ -6,14 +6,6 @@ import enums.Region;
 
 public class AwsInstance extends AwsObject {
 
-    public String getType() {
-        return type;
-    }
-
-    public AwsInstanceState getState() {
-        return state;
-    }
-
     public AwsInstance(int id, Region region, String type, AwsInstanceState state) {
         super(id, region);
         this.state = state;
@@ -21,6 +13,10 @@ public class AwsInstance extends AwsObject {
     }
 
     private String type;
+
+    public AwsInstanceState getState() {
+        return state;
+    }
 
     private AwsInstanceState state;
 }

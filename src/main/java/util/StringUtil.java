@@ -35,7 +35,6 @@ public class StringUtil {
         try {
             return array[index];
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Value was null");
             return "";
         }
     }

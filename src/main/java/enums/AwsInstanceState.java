@@ -11,4 +11,9 @@ public enum AwsInstanceState {
     AwsInstanceState(String awsState) {
         state = awsState;
     }
+
+    public String toString() {
+        return this.state;
+    }
+
 }

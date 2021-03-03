@@ -1,5 +1,0 @@
-aws_instance_data='id:1100,type:micro,state:running,region:oregon% Id:1200,type:large1,state:terminated,region:n.virginia% Id:1300,type:xlarge3,state:stopped,region:pasific% Id:1400,type:large1,state:running,region:oregon'
-
-aws_volume_data='id:2100,name:data1,state:available,region:ohio,attached_instance_id:% id:2200,name:data1,state:in-use,region:ohio,attached_instance_id:1100% id:2300,name:data2,state:available,region:london,attached_instance_id:1200% id:2400,name:data2,state:in-use,region:oregon,attached_instance_id:1300'
-
-aws_snapshot_data='id:3100,name:data1_backup,region:oregon,source_volume_id:2100% id:3200,name:data2_backup,region:virginia,source_volume_id:2400%'

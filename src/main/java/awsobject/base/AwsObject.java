@@ -3,10 +3,7 @@ package awsobject.base;
 import enums.Region;
 
 import java.lang.reflect.Field;
-
-import java.text.Collator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -22,10 +19,6 @@ public abstract class AwsObject {
 
     private int id;
 
-    public Region getRegion() {
-        return region;
-    }
-
     public int getId() {
         return id;
     }
@@ -33,29 +26,23 @@ public abstract class AwsObject {
     public String toString() {
         StringBuilder result = new StringBuilder();
         String newLine = System.getProperty("line.separator");
-
-        //result.append(this.getClass().getName());
-       // result.append(" {");
-        //result.append(newLine);
-
         List<Field> mergedFields = getAllFields();
 
         for (Field field : mergedFields) {
             result.append("  ");
             try {
                 result.append(field.getName());
-                result.append(": ");
+                result.append(":");
                 field.setAccessible(true);
                 result.append(field.get(this));
             } catch (IllegalAccessException ex) {
-                System.out.println(ex);
+                ex.printStackTrace();
             }
             result.append(newLine);
         }
-      //  result.append("}");
-
         return result.toString();
     }
+
     public List<Field> getAllFields() {
         Field[] fields = this.getClass().getDeclaredFields();
         Field[] superFields = this.getClass().getSuperclass().getDeclaredFields();

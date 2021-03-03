@@ -6,13 +6,13 @@ public enum AwsEntityType {
     Volume("aws_volume"),
     Snapshot("aws_snapshot");
 
-    private final String state;
+    private final String entityType;
 
-    AwsEntityType(String awsState) {
-        state = awsState;
+    AwsEntityType(String awsEntityType) {
+        entityType = awsEntityType;
     }
 
     public String toString() {
-        return this.state;
+        return this.entityType;
     }
 }
