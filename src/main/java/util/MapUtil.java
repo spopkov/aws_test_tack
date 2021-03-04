@@ -24,7 +24,7 @@ public class MapUtil {
      */
     public static Map<String, String> awsObjectPropertiesAsMap(AwsObject awsObject) {
         //Cleanup AwsObject string to not have whitespaces in keys/values
-        String props = cleanupString(awsObject.toString(),"[\\s+]{3}", ",");
+        String props = cleanupString(awsObject.toString(),"[\\s+]{1,}", ",");
         return stringToMap(props);
     }
 }
