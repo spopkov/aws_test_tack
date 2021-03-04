@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static util.MapUtil.getFromMap;
 import static util.MapUtil.awsObjectPropertiesAsMap;
+import static util.MapUtil.getFromMap;
 import static util.ResourceFileHelper.getAwsObjectsString;
 import static util.StringUtil.cleanupString;
 
@@ -36,9 +36,21 @@ public class ObjectLookup {
         List<Predicate<AwsObject>> allPredicates = new ArrayList<>();
         propertyMap.keySet().forEach(key ->
                 //Predicate will take a value from AwsObject's properties and compare with value with the same key in a map
-                allPredicates.add(awsObject -> getFromMap(awsObjectPropertiesAsMap(awsObject), key)
-                        .equals(cleanupString(propertyMap.get(key).toString()))));
+                allPredicates.add(awsObject -> getPropertyFromMap(awsObject, propertyMap, key)));
         return allPredicates;
+    }
+    //Check if AwsObject map contains required property
+    private static boolean getPropertyFromMap(AwsObject awsObject, Map<String, Object> propertyMap, String key) {
+        //Get searched value from request map
+        String searchedPropertyValue = propertyMap.get(key).toString();
+        //Cleanup string to replace specific characters
+        String beautifiedPropValue = cleanupString(searchedPropertyValue);
+        //Transform AwsObject properties to map
+        Map<String, String> awsObjectPropertiesAsMap = awsObjectPropertiesAsMap(awsObject);
+        //Get value of searched property from objects map
+        String value = getFromMap(awsObjectPropertiesAsMap, key);
+
+        return value.equals(beautifiedPropValue);
     }
 
     @SuppressWarnings("unchecked")
