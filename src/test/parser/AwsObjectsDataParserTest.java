@@ -25,7 +25,6 @@ public class AwsObjectsDataParserTest {
         awsObjList.forEach(awsObject -> {
             Assert.assertTrue(awsObject.getClass().getName().toLowerCase().endsWith(convertAwsEntityTypeToClassName(awsEntityType)));
         });
-        System.out.println(awsObjList);
     }
 
     private String convertAwsEntityTypeToClassName(AwsEntityType awsEntityType){
