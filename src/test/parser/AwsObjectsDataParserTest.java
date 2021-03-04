@@ -18,7 +18,7 @@ public class AwsObjectsDataParserTest {
         return new Object[][]{{Instance}, {Volume}, {Snapshot}};
     }
 
-    @Test(dataProvider = "awsEntityType")
+    @Test(dataProvider = "awsEntityType", description = "Check that parser returns objects of proper type")
     public void awsObjectsListTest(AwsEntityType awsEntityType) {
         String objects = getAwsObjectsString(awsEntityType);
         List<AwsObject> awsObjList = new AwsObjectsDataParser().getObjectList(awsEntityType, objects);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BasicFunctionTest {
 
-    @Test
+    @Test(description = "Get list of all available AwsObjects and check that it contains them all")
     public void awsObjectsListTest() {
         List<AwsObject> awsObjList = new AwsObjectsDataParser().getAllAwsObjects();
         Assert.assertEquals(awsObjList.size(), 10, "Objects list size is incorrect");

@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 public class ResourceFileHelper {
 
+    //Get resource file and transform it to string
     private static String readStream(String resourcePath) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         InputStream stream = classLoader.getResourceAsStream(resourcePath);
@@ -17,7 +18,7 @@ public class ResourceFileHelper {
            throw new RuntimeException(e);
         }
     }
-
+    //Get objects string for provided type of AwsObject
     public static String getAwsObjectsString(AwsEntityType dataType){
         return readStream(dataType.toString());
     }

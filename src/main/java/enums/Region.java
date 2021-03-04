@@ -5,7 +5,7 @@ public enum Region {
     california("California"),
     ohio("Ohio"),
     oregon("Oregon"),
-    nvirginia("North Virginia"),
+    n_virginia("North Virginia"),
     virginia("Virginia"),
     pasific("Pasific"),
     london("London");
