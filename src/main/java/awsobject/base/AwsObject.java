@@ -27,8 +27,9 @@ public abstract class AwsObject {
     public String toString() {
         StringBuilder result = new StringBuilder();
         String newLine = System.getProperty("line.separator");
-        List<Field> mergedFields = getAllFields();
+        result.append(newLine);
 
+        List<Field> mergedFields = getAllFields();
         for (Field field : mergedFields) {
             result.append("  ");
             try {
