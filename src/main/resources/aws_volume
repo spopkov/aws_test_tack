@@ -1,0 +1,1 @@
+id:2100,name:data1,state:available,region:ohio,attached_instance_id:% id:2200,name:data1,state:in-use,region:ohio,attached_instance_id:1100% id:2300,name:data2,state:available,region:london,attached_instance_id:1200% id:2400,name:data2,state:in-use,region:oregon,attached_instance_id:1300
