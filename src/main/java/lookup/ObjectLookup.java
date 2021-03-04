@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import static util.MapUtil.getFromMap;
 import static util.MapUtil.awsObjectPropertiesAsMap;
 import static util.ResourceFileHelper.getAwsObjectsString;
+import static util.StringUtil.cleanupString;
 
 public class ObjectLookup {
 
@@ -35,7 +36,8 @@ public class ObjectLookup {
         List<Predicate<AwsObject>> allPredicates = new ArrayList<>();
         propertyMap.keySet().forEach(key ->
                 //Predicate will take a value from AwsObject's properties and compare with value with the same key in a map
-                allPredicates.add(awsObject -> getFromMap(awsObjectPropertiesAsMap(awsObject), key).equals(propertyMap.get(key))));
+                allPredicates.add(awsObject -> getFromMap(awsObjectPropertiesAsMap(awsObject), key)
+                        .equals(cleanupString(propertyMap.get(key).toString()))));
         return allPredicates;
     }
 
