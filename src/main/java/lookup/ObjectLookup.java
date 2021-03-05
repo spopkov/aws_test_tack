@@ -5,6 +5,7 @@ import enums.AwsEntityType;
 import parser.AwsObjectsDataParser;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -33,7 +34,7 @@ public class ObjectLookup {
 
     //Create one or more predicates which will be used in a filter
     private static List<Predicate<AwsObject>> getPredicatesFromMap(Map<String, Object> propertyMap) {
-        List<Predicate<AwsObject>> allPredicates = new ArrayList<>();
+        List<Predicate<AwsObject>> allPredicates = new LinkedList<>();
         propertyMap.keySet().forEach(key ->
                 //Predicate will take a value from AwsObject's properties and compare with value with the same key in a map
                 allPredicates.add(awsObject -> getPropertyFromMap(awsObject, propertyMap, key)));

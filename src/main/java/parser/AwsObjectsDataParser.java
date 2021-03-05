@@ -17,7 +17,7 @@ public class AwsObjectsDataParser {
         //Create list of types
         List<AwsEntityType> awsEntityTypes = Arrays.asList(AwsEntityType.values());
         //Create empty list which will work as a consumer
-        List<List<AwsObject>> allObjects = new ArrayList<>();
+        List<List<AwsObject>> allObjects = new LinkedList<>();
         //For each entity type parse corresponding string and create lists of AwsObjects
         awsEntityTypes.forEach(awsEntityType -> {
             allObjects.add(getObjectList(awsEntityType, getAwsObjectsString(awsEntityType)));
@@ -31,7 +31,7 @@ public class AwsObjectsDataParser {
     //Returns a list of AwsObjects of provided type
     public List<AwsObject> getObjectList(AwsEntityType type, String objectsString) {
         //Consumer for Map AwsObject properties
-        List<Map<String, String>> properties = new ArrayList<>();
+        List<Map<String, String>> properties = new LinkedList<>();
         //Create a list of AwsObject strings
         List<String> objects = getAwsObjectsList(objectsString);
         //Create properties map for each of the AwsObjects and put it in List
