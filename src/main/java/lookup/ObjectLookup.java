@@ -22,7 +22,7 @@ public class ObjectLookup {
         return awsObjList.stream()
                 .filter(predicates
                         .stream()
-                        .reduce(x -> true, Predicate::and))
+                        .reduce(predicate -> true, Predicate::and))
                 .collect(Collectors.toList());
     }
 
